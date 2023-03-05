@@ -10,7 +10,7 @@ const InformationSchema = new mongoose.Schema({
     required: true,
   },
   infoList: {
-    type: Object,
+    type: Array,
     required: true,
   },
 });

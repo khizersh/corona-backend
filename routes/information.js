@@ -7,13 +7,47 @@ const path = "./csv/user.csv";
 router.post("/save", async (req, res) => {
   const request = new Information(req.body);
   try {
-    const dbUser = await Information.exists({ email: request.email });
+    const dbUser = await Information.findOne({
+      email: request.email,
+      date: request.date,
+    });
     if (dbUser != null) {
-      await request.save();
+      let requestList = request?.infoList;
+      if (requestList?.length) {
+        let currentList = dbUser["infoList"];
+        requestList.map((m) => currentList.push(m));
+        dbUser["infoList"] = currentList;
+        dbUser.save();
+      }
       res.send({ status: 0000, message: "success" }).status(200);
     } else {
-      return res
-        .send({ status: 9999, message: "Email not exist!" })
+      await request.save();
+      res.send({ status: 0000, message: "success" }).status(200);
+    }
+  } catch (error) {
+    console.log("error : ", error.message);
+    res.send({ status: 9999, message: "Something went wrong!" }).status(200);
+  }
+});
+
+router.post("/fetch", async (req, res) => {
+  let body = req.body;
+  // let path = "../backend/csv/user.csv";
+
+  try {
+    if (body.email) {
+      //   const infoList = await Information.find({});
+      const infoList = await Information.findOne({
+        email: body.email,
+        date: body.date,
+      });
+
+      res
+        .send({
+          status: "0000",
+          message: "success",
+          data: infoList,
+        })
         .status(200);
     }
   } catch (error) {
@@ -22,30 +56,24 @@ router.post("/save", async (req, res) => {
   }
 });
 
-router.post("/signin", async (req, res) => {
+router.post("/fetch-by-email", async (req, res) => {
   let body = req.body;
   // let path = "../backend/csv/user.csv";
 
   try {
-    if (body.email && body.password) {
-      const isExistEmail = await Information.findOne({
+    if (body.email) {
+      //   const infoList = await Information.find({});
+      const infoList = await Information.find({
         email: body.email,
-        password: body.password,
       });
 
-      if (isExistEmail) {
-        res
-          .send({
-            status: "0000",
-            message: "Successfully login!",
-            data: isExistEmail,
-          })
-          .status(200);
-      } else {
-        res
-          .send({ status: "9999", message: "Invalid credentials!" })
-          .status(200);
-      }
+      res
+        .send({
+          status: "0000",
+          message: "success",
+          data: infoList,
+        })
+        .status(200);
     }
   } catch (error) {
     console.log("error : ", error.message);
