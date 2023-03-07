@@ -10,4 +10,7 @@ const validateEmail = (email) => {
   return flag;
 };
 
-module.exports = { validateEmail };
+// const SecretKey = "mysecret";
+const SecretKey = "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";
+
+module.exports = { validateEmail  , SecretKey};
