@@ -209,11 +209,12 @@ router.post("/signup-google", async (request, response) => {
           })
           .status(200);
       } else {
-        await user.save();
+        const savedUser = await user.save();
         response
           .send({
             status: "0000",
-            message: "Successfully login!",
+            message: "Successfully registered!",
+            data: savedUser
           })
           .status(200);
       }
