@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const port = process.env.PORT || 3001;
 const UserRoute = require("./routes/users");
 const InformationRoute = require("./routes/information");
+const EmailRoute = require("./routes/email");
 
 
 const app = express();
@@ -29,6 +30,7 @@ app.use((req, res, next) => {
 
 app.use("/user", UserRoute);
 app.use("/info", InformationRoute);
+app.use("/email", EmailRoute);
 
 const mongoUrl = `mongodb+srv://${username}:${password}@cluster0.a1hrtd3.mongodb.net/${dbname}?retryWrites=true&w=majority`;
 
