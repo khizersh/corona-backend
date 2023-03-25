@@ -5,7 +5,7 @@ const port = process.env.PORT || 3001;
 const UserRoute = require("./routes/users");
 const InformationRoute = require("./routes/information");
 const EmailRoute = require("./routes/email");
-
+const TokenRoute = require("./routes/token");
 
 const app = express();
 const cors = require("cors");
@@ -27,20 +27,18 @@ app.use((req, res, next) => {
   next();
 });
 
-
 app.use("/user", UserRoute);
 app.use("/info", InformationRoute);
 app.use("/email", EmailRoute);
+app.use("/email", EmailRoute);
+app.use("/token", TokenRoute);
 
 const mongoUrl = `mongodb+srv://${username}:${password}@cluster0.a1hrtd3.mongodb.net/${dbname}?retryWrites=true&w=majority`;
 
-mongoose.set('strictQuery', false)
-mongoose.connect(
-  mongoUrl,
-  async(err)=>{
-      if(err) throw err;
-      console.log("conncted to db")
-  }
-)
+mongoose.set("strictQuery", false);
+mongoose.connect(mongoUrl, async (err) => {
+  if (err) throw err;
+  console.log("conncted to db");
+});
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
