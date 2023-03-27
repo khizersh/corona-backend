@@ -5,10 +5,10 @@ const User = require("../models/UserSchema");
 const { generateString } = require("../service/commonService");
 const nodemailer = require("nodemailer");
 
-// const username = "mycoviddiary547@gmail.com";
-// const password = "Apple123@";
-const username = "artisttesttesting@gmail.com";
-const password = "emuvezdvtcxlpzdt";
+const username = "mycoviddiary547@gmail.com";
+const password = "bpsbncsxdgcnfoxq";
+// const username = "artisttesttesting@gmail.com";
+// const password = "emuvezdvtcxlpzdt";
 
 
 var transporter = nodemailer.createTransport({
@@ -50,7 +50,7 @@ router.post("/forget", async (request, response) => {
         transporter.sendMail(mailOptions, function (error, info) {
           if (error) {
             response
-              .send({ status: 9999, message: "Invalid call!" })
+              .send({ status: 9999, message: "Error while sending email!" })
               .status(200);
           } else {
             response.send({ status: "0000", message: "success" });
