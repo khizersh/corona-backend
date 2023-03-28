@@ -10,7 +10,6 @@ const password = "bpsbncsxdgcnfoxq";
 // const username = "artisttesttesting@gmail.com";
 // const password = "emuvezdvtcxlpzdt";
 
-
 var transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   secureConnection: false,
@@ -28,6 +27,7 @@ var transporter = nodemailer.createTransport({
 router.post("/forget", async (request, response) => {
   const body = new PasswordReset(request.body);
 
+  console.log("body : ", body);
   try {
     if (body.email) {
       const user = await User.exists({ email: body.email });
@@ -35,7 +35,6 @@ router.post("/forget", async (request, response) => {
         const token = generateString(10).trim();
         body.token = token;
         body.isUsed = false;
-
         await body.save();
 
         var mailOptions = {
@@ -61,6 +60,7 @@ router.post("/forget", async (request, response) => {
       response.send({ status: 9999, message: "Invalid call!" }).status(200);
     }
   } catch (error) {
+    console.log("error : ", error);
     response
       .send({ status: 9999, message: "Something went wrong!" })
       .status(200);
