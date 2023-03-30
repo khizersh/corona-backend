@@ -10,8 +10,8 @@ const TokenRoute = require("./routes/token");
 const app = express();
 const cors = require("cors");
 
-const username = "bigbeat";
-const password = "bigbeat123";
+const username = "corona";
+const password = "7J2bkB7OwrujJHLV";
 const cluster = "<cluster name>";
 const dbname = "corona";
 
@@ -33,7 +33,8 @@ app.use("/email", EmailRoute);
 app.use("/email", EmailRoute);
 app.use("/token", TokenRoute);
 
-const mongoUrl = `mongodb+srv://${username}:${password}@cluster0.a1hrtd3.mongodb.net/${dbname}?retryWrites=true&w=majority`;
+
+const mongoUrl = `mongodb+srv://${username}:${password}@cluster0.jo03lew.mongodb.net/${dbname}?retryWrites=true&w=majority`;
 
 mongoose.set("strictQuery", false);
 mongoose.connect(mongoUrl, async (err) => {
