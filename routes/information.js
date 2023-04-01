@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Information = require("../models/InformationSchema");
 
-const path = "./csv/user.csv";
 
 router.post("/save", async (req, res) => {
   const request = new Information(req.body);
@@ -32,7 +31,6 @@ router.post("/save", async (req, res) => {
 
 router.post("/fetch", async (req, res) => {
   let body = req.body;
-  // let path = "../backend/csv/user.csv";
 
   try {
     if (body.email) {
@@ -58,7 +56,6 @@ router.post("/fetch", async (req, res) => {
 
 router.post("/fetch-by-email", async (req, res) => {
   let body = req.body;
-  // let path = "../backend/csv/user.csv";
 
   try {
     if (body.email) {

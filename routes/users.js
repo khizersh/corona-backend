@@ -1,14 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const createCsvWriter = require("csv-writer").createObjectCsvWriter;
-const Fs = require("fs");
-const CsvReadableStream = require("csv-reader");
 const User = require("../models/UserSchema");
 const { validateEmail, SecretKey } = require("../service/commonService");
-const Information = require("../models/InformationSchema");
 const jwt = require("jsonwebtoken");
 
-const path = "./csv/user.csv";
 
 router.post("/signup", async (req, res) => {
   const request = new User(req.body);
