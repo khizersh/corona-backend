@@ -33,7 +33,6 @@ router.post("/signup", async (req, res) => {
 
 router.post("/delete", async (req, res) => {
   let body = req.body;
-  // let path = "../backend/csv/user.csv";
 
   try {
     const data = await User.deleteOne({ email: body.email });
@@ -46,7 +45,6 @@ router.post("/delete", async (req, res) => {
 
 router.post("/signin", async (req, res) => {
   let body = req.body;
-  // let path = "../backend/csv/user.csv";
 
   try {
     if (body.email && body.password) {
@@ -97,7 +95,6 @@ router.post("/signin", async (req, res) => {
 
 router.post("/reset", async (req, res) => {
   let body = req.body;
-  // let path = "../backend/csv/user.csv";
 
   try {
     if (body.email && body.password) {
@@ -187,7 +184,6 @@ router.post("/find-user", async (request, response) => {
 });
 router.post("/signup-google", async (request, response) => {
   let body = request.body;
-  // let path = "../backend/csv/user.csv";
   const user = new User(request.body);
 
   try {
